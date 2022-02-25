@@ -61,12 +61,17 @@ const questions = [
     }
 ]
 
-var timerElement = document.querySelector(".timer-count");
+// var timerElement = document.querySelector(".timer-count");
 var startButton = document.getElementById('start-btn');
+// var timer;
+// var secondsLeft=60;
+// var timerEl = document.getElementById("timer-count");
+// var secondsLeft = 60;
+var timerEl = document.getElementById("count")
+var count = 75;
 var timer;
-var secondsLeft=60;
-var timerEl = document.getElementById("timer-count");
-var secondsLeft = 60;
+
+
 var qaContainerEl = document.getElementById("qaContainer");
 var choice1 = document.getElementById("choice1");
 var choice2 = document.getElementById("choice2");
@@ -83,6 +88,8 @@ function startQuiz() {
     qaContainerEl.classList.remove('hide');
     displayQs();
     startTimer();
+
+
     // timer = setInterval(function() {
     //     secondsLeft--;
     //     timerEl.textContent = secondsLeft;
@@ -110,7 +117,16 @@ function displayQs() {
     choice4.innerText = questions[questionIndex].choice4;
 };
 
-
+function startTimer () {
+    timer = setInterval(function () {
+        timerEl.innerText = count;
+        console.log(count);
+        count--;
+        if(count ===0) {
+            stopInterval()
+        }
+    },1000);
+}
 
 // function startGame() {
 //     isWin = false;
@@ -123,24 +139,24 @@ function displayQs() {
 
 
 // Timer from Mini Project
-function startTimer() {
-    // Sets timer
-    timer = setInterval(function() {
-      secondsLeft--;
-      timerElement.innerText = secondsLeft;
-      if (secondsLeft >= 0) {
-        // Tests if win condition is met
-        if (isWin && secondsLeft > 0) {
-          // Clears interval and stops timer
-          clearInterval(timer);
-          winGame();
-        }
-      }
-      // Tests if time has run out
-      if (secondsLeft === 0) {
-        // Clears interval
-        clearInterval(timer);
-        loseGame();
-      }
-    }, 1000)
-}
+// function startTimer() {
+//     // Sets timer
+//     timer = setInterval(function() {
+//       secondsLeft--;
+//       timerElement.innerText = secondsLeft;
+//       if (secondsLeft >= 0) {
+//         // Tests if win condition is met
+//         if (isWin && secondsLeft > 0) {
+//           // Clears interval and stops timer
+//           clearInterval(timer);
+//           winGame();
+//         }
+//       }
+//       // Tests if time has run out
+//       if (secondsLeft === 0) {
+//         // Clears interval
+//         clearInterval(timer);
+//         loseGame();
+//       }
+//     }, 1000)
+// }
