@@ -1,0 +1,17 @@
+
+  /* .header {
+    display: flex;
+    max-height: 100vh;
+    flex-direction: column;
+    margin-top: auto;
+  }
+
+  main {
+    flex: 1 0 auto;
+  } */
+
+
+
+.qaContainer {
+    display:hide;
+}
