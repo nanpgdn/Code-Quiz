@@ -11,13 +11,6 @@
 //     year: 1969
 //   };
 // var startButton = document.getElementById("start-btn")
-
-
-
-    
-
-
-
 const questions = [
     {
         question: "Inside which HTML element do we put the JavaScript?",
@@ -25,7 +18,7 @@ const questions = [
         choice2: "2. <javascript>",
         choice3: "3. <scripting>",
         choice4: "4. <script>",
-        correct: "4. <script>"
+        correctAns: "4. <script>"
     },
     {
         question: "What does 'HTML' stand for?",
@@ -33,7 +26,7 @@ const questions = [
         choice2: "2. Home Tool Markup Language",
         choice3: "3. Handle Text and Markup Languages",
         choice4: "4. Handlebars Tech Markup Language",
-        correct: "1. Hypertext Markup Language"
+        correctAns: "1. Hypertext Markup Language"
     },
     {
         question: "Arrays in JavaScript can be used to store _____.",
@@ -41,7 +34,7 @@ const questions = [
         option2: "2. other arrays",
         option3: "3. booleans",
         option4: "4. all of the above",
-        correct: "4. all of the above"
+        correctAns: "4. all of the above"
     },
     {
         question: "What does CSS stand for?",
@@ -49,7 +42,7 @@ const questions = [
         choice2: "2. Computer Style Sheets",
         choice3: "3. Colorful Style Sheets",
         choice4: "4. Cascading Style Sheets",
-        correct: "4. Cascading Style Sheets"
+        correctAns: "4. Cascading Style Sheets"
     },
     {
         question: "What does DOM stand for?",
@@ -57,7 +50,7 @@ const questions = [
         choice2: "2. Document Object Model",
         choice3: "3. Digital Object Model",
         choice4: "4. Desktop Orientation Model",
-        correctAnswer: "2. Document Object Model",
+        correctAns: "2. Document Object Model",
     }
 ]
 
@@ -68,10 +61,11 @@ var startButton = document.getElementById('start-btn');
 // var timerEl = document.getElementById("timer-count");
 // var secondsLeft = 60;
 var timerEl = document.getElementById("count")
-var count = 75;
+var count = 60;
 var timer;
+var loseMsg = document.getElementById("lose")
 
-
+var correctIncorrect = document.getElementById("correctIncorrect")
 var qaContainerEl = document.getElementById("qaContainer");
 var choice1 = document.getElementById("choice1");
 var choice2 = document.getElementById("choice2");
@@ -82,6 +76,8 @@ var question = document.getElementById("question");
 startButton.addEventListener('click', startQuiz);
 var questionIndex = 0;
 
+var choiceBtn = document.getElementById("choice")
+
 function startQuiz() {
     console.log("I am working");
     startButton.classList.add('hide');
@@ -89,7 +85,7 @@ function startQuiz() {
     displayQs();
     startTimer();
 
-
+    //example timer
     // timer = setInterval(function() {
     //     secondsLeft--;
     //     timerEl.textContent = secondsLeft;
@@ -115,19 +111,58 @@ function displayQs() {
     choice2.innerText = questions[questionIndex].choice2;
     choice3.innerText = questions[questionIndex].choice3;
     choice4.innerText = questions[questionIndex].choice4;
+    console.log("Question #" + questionIndex);
 };
+
+
 
 function startTimer () {
     timer = setInterval(function () {
         timerEl.innerText = count;
         console.log(count);
         count--;
-        if(count ===0) {
-            stopInterval()
+        if(count ===-1) {
+            clearInterval(timer);
         }
     },1000);
-}
+};
 
+
+choiceBtn.addEventListener('click', checkAnswer)
+var answer = choiceBtn.addEventListener("click", checkAnswer)
+
+function checkAnswer() {
+    if (questions[questionIndex].correctAns !== answer) {
+        correctIncorrect.innerText = "Correct!" ;
+        console.log("correct!");
+        
+    }
+    else if (correctAns !== answer){
+
+        correctIncorrect.innerText = "Incorrect!"
+        count -= 10;
+    }
+    questionIndex++;
+    if (questionIndex<=questions.length){
+    displayQs();
+    }
+
+};
+
+function endGame() {
+    if (timer === 0) {
+        loseMsg.classList.remove('hide')
+    }
+}
+endGame();
+// for (i of choiceBtn) {
+//     i.addEventListener('click', function() {
+//         checkAnswer(this.innerHTML);
+//     });
+// };
+
+
+//example function
 // function startGame() {
 //     isWin = false;
 //     timerCount = 10;
@@ -138,7 +173,7 @@ function startTimer () {
 //   }
 
 
-// Timer from Mini Project
+// Timer from Mini Project 
 // function startTimer() {
 //     // Sets timer
 //     timer = setInterval(function() {
